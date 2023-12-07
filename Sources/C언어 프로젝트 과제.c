@@ -150,7 +150,9 @@ void shopping() {
 	int purpose_shopping;
 	char market_place[9][9] = { "나이키", "스파이더", "8seconds", "MLB", "FILA", "유니클로","스투시", "무신사", "아디다스" };
 	char clothes_brand[9][9] = { "스파이더","나이키","아디다스","MLB","8seconds","유니클로","FILA","무신사","스투시" };
+	char Luxury_brand[9][20] = { "CHANEL","DIOR","BALENCIAGA","GUCCI","Yves Saint Laurent","PRADA","Louis Vuitton","Hermes","Burberry" };
 	char(*p)[9] = clothes_brand;
+	char(*q)[20] = Luxury_brand;
 	char brand_name[10] = "";
 	int brand_number;
 	int j;
@@ -169,6 +171,25 @@ void shopping() {
 				printf("\t");
 			}
 			if (i == 3 || i == 6) {
+				printf("\t");
+			}
+			if (i == 2 || i == 5) {
+				printf("\n");
+			}
+		}
+		printf("\n");
+		printf("%s는 위의 표의 %d번에 있습니다.", brand_name, brand_number);
+	}
+	else if (purpose_shopping == 3) {
+		printf("어떤 브랜드를 원하십니까?\n 1. CHANEL 2. DIOR 3. BALENCIAGA 4. GUCCI 5. Yves Saint Laurent 6. PRADA 7. Louis Vuitton 8. Hermes 9. Burberry");
+		scanf_s("%d", &brand_number);
+		strcpy_s(brand_name, sizeof(brand_name), q[brand_number - 1]);
+		for (int i = 0; i <= 8; i++) {
+			printf("%d. %s", i + 1, q[i]);
+			if (i == 0) { //왜 i==1으로만 설정했을땐 되면서 i==0을 위에 설정하면 왜 i==1일때 탭이 안될까..?
+				printf("\t");
+			}
+			if (i == 1) {
 				printf("\t");
 			}
 			if (i == 2 || i == 5) {
