@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+//1번 함수 만들기 시작
 void select_movie_time(char** time_movie, int want_time, char* select_time) { //select_movie의 세부 함수
 	char(*p)[9] = time_movie;
 	char answer[10];
@@ -146,6 +147,9 @@ void movie_theater() { // 영화를 선택했을 시의 메인이 되는 함수. 나중에 가격, 인
 		}*/
 	}
 }
+//1번 함수 만들기 끝
+
+//2번 함수 만들기 시작
 void shopping() {
 	int purpose_shopping;
 	char market_place[9][9] = { "나이키", "스파이더", "8seconds", "MLB", "FILA", "유니클로","스투시", "무신사", "아디다스" };
@@ -200,9 +204,151 @@ void shopping() {
 		printf("%s는 위의 표의 %d번에 있습니다.", brand_name, brand_number);
 	}
 }
-//To_do : 쇼핑 3번 기능 만들기
+//2번 함수 만들기 끝.
 //나중에 모든 매장의 위치를 저장한 후에 위치를 알려주는 함수를 만드는 것도 좋을듯.
 
+//3번 함수 만들기 시작
+typedef struct Korean_Food_price {
+	char food_name[3][10];
+	int food_price[3];
+}Kfood_price;
+
+typedef struct Japanese_Food_price {
+	char food_name[3][10];
+	int food_price[3];
+}Jfood_price;
+
+typedef struct Chinese_Food_price {
+	char food_name[3][10];
+	int food_price[3];
+}Cfood_price;
+
+void select_korean_menu(Kfood_price food, int yes_or_no, int food_number) {
+	do {
+		if (yes_or_no == 1) {
+			printf("%s %d원입니다.", food.food_name[food_number - 1], food.food_price[food_number - 1]);
+			break;
+		}
+		else if (yes_or_no == 2) {
+			printf("그렇다면 메뉴를 다시 골라주세요.\n");
+			for (int i = 0; i < 3; i++) {
+				printf("%d. %s ", i + 1, food.food_name[i]);
+			}
+			printf("\n");
+			printf("위의 메뉴에서 하나 골라주세요 : ");
+			scanf_s("%d", &food_number);
+			printf("고르신 메뉴가 %s이/가 맞습니까?\t 1. 예 2. 아니오 : ", food.food_name[food_number - 1]);
+			scanf_s("%d", &yes_or_no);
+			continue;
+		}
+		else {
+			printf("잘못된 입력입니다. 다시 입력해주세요.\n");
+			printf("고르신 메뉴가 %s이/가 맞습니까?\t 1. 예 2. 아니오 : ", food.food_name[food_number - 1]);
+			scanf_s("%d", &yes_or_no);
+		}
+	} while (1);
+}
+void select_japanese_menu(Jfood_price food, int yes_or_no, int food_number) {
+	do {
+		if (yes_or_no == 1) {
+			printf("%s %d원입니다.", food.food_name[food_number - 1], food.food_price[food_number - 1]);
+			break;
+		}
+		else if (yes_or_no == 2) {
+			printf("그렇다면 메뉴를 다시 골라주세요.\n");
+			for (int i = 0; i < 3; i++) {
+				printf("%d. %s ", i + 1, food.food_name[i]);
+			}
+			printf("\n");
+			printf("위의 메뉴에서 하나 골라주세요 : ");
+			scanf_s("%d", &food_number);
+			printf("고르신 메뉴가 %s이/가 맞습니까?\t 1. 예 2. 아니오 : ", food.food_name[food_number - 1]);
+			scanf_s("%d", &yes_or_no);
+			continue;
+		}
+		else {
+			printf("잘못된 입력입니다. 다시 입력해주세요.\n");
+			printf("고르신 메뉴가 %s이/가 맞습니까?\t 1. 예 2. 아니오 : ", food.food_name[food_number - 1]);
+			scanf_s("%d", &yes_or_no);
+		}
+	} while (1);
+}
+void select_chinese_menu(Cfood_price food, int yes_or_no, int food_number) {
+	do {
+		if (yes_or_no == 1) {
+			printf("%s %d원입니다.", food.food_name[food_number - 1], food.food_price[food_number - 1]);
+			break;
+		}
+		else if (yes_or_no == 2) {
+			printf("그렇다면 메뉴를 다시 골라주세요.\n");
+			for (int i = 0; i < 3; i++) {
+				printf("%d. %s ", i + 1, food.food_name[i]);
+			}
+			printf("\n");
+			printf("위의 메뉴에서 하나 골라주세요 : ");
+			scanf_s("%d", &food_number);
+			printf("고르신 메뉴가 %s이/가 맞습니까?\t 1. 예 2. 아니오 : ", food.food_name[food_number - 1]);
+			scanf_s("%d", &yes_or_no);
+			continue;
+		}
+		else {
+			printf("잘못된 입력입니다. 다시 입력해주세요.\n");
+			printf("고르신 메뉴가 %s이/가 맞습니까?\t 1. 예 2. 아니오 : ", food.food_name[food_number - 1]);
+			scanf_s("%d", &yes_or_no);
+		}
+	} while (1);
+}
+
+void cafeteria() {
+	//구조체에 값 저장완료
+	Kfood_price kfood = { {{"제육볶음\0"},{"김치찌개"},{"돌솥비빔밥"}}, {7000,6000,6000} };
+	Jfood_price jfood = { {"등심카츠","마제소바","모듬초밥"}, {9000,9000,15000} };
+	Cfood_price cfood = { {"짜장면", "짬뽕","탕수육(소)"}, {5000, 7000, 10000} };
+	int kind_of_food;
+	printf("어떤 종류의 음식을 드시고 싶으신가요?\n 1. 한식 2. 일식 3. 중식 :  ");
+	scanf_s("%d", &kind_of_food);
+	int food_number;
+	int yes_or_no;
+	if (kind_of_food == 1) {
+		for (int i = 0; i < 3; i++) {
+			printf("%d. %s ", i + 1, kfood.food_name[i]);
+		}
+		printf("\n");
+		printf("위의 메뉴에서 하나 골라주세요 : ");
+		scanf_s("%d", &food_number);
+		printf("고르신 메뉴가 %s이/가 맞습니까?\t 1. 예 2. 아니오 : ", kfood.food_name[food_number - 1]);
+		scanf_s("%d", &yes_or_no);
+		select_korean_menu(kfood, yes_or_no, food_number);
+	}
+	if (kind_of_food == 2) {
+		for (int i = 0; i < 3; i++) {
+			printf("%d. %s ", i + 1, jfood.food_name[i]);
+		}
+		printf("\n");
+		printf("위의 메뉴에서 하나 골라주세요 : ");
+		scanf_s("%d", &food_number);
+		printf("고르신 메뉴가 %s이.가 맞습니가?\t 1. 예 2. 아니오 : ", jfood.food_name[food_number - 1]);
+		scanf_s("%d", &yes_or_no);
+		select_japanese_menu(jfood, yes_or_no, food_number);
+	}
+	if (kind_of_food == 3) {
+		for (int i = 0; i < 3; i++) {
+			printf("%d. %s ", i + 1, cfood.food_name[i]);
+		}
+		printf("\n");
+		printf("위의 메뉴에서 하나 골라주세요 : ");
+		scanf_s("%d", &food_number);
+		printf("고르신 메뉴가 %s이/가 맞습니가?\t 1. 예 2. 아니오 : ", cfood.food_name[food_number - 1]);
+		scanf_s("%d", &yes_or_no);
+		select_chinese_menu(cfood, yes_or_no, food_number);
+	}
+}
+//3번 함수 만들기 끝.
+
+//4번 함수 만들기 시작
+void exercise() {
+
+}
 int main() {
 	int purpose_to_here;
 	int place_matrix[3][3]= { {1,2,3},{4,5,6},{7,8,9} }; 
@@ -213,6 +359,12 @@ int main() {
 	}
 	else if (purpose_to_here == 2) {
 		shopping();
+	}
+	else if (purpose_to_here == 3) {
+		cafeteria();
+	}
+	else if (purpose_to_here == 4) {
+		exercise();
 	}
 	return 0;
 }
