@@ -142,7 +142,7 @@ void shopping() {
 	char Luxury_brand[9][20] = { "CHANEL","DIOR","BALENCIAGA","GUCCI","Yves Saint Laurent","PRADA","Louis Vuitton","Hermes","Burberry" };
 	char(*p)[9] = clothes_brand;
 	char(*q)[20] = Luxury_brand;
-	char brand_name[10] = "";
+	char brand_name[20];
 	int brand_number;
 	int j;
 	printf("쇼핑할 품목이 무엇인가요?\n 1. 식자재 2. 의류 3. 명품 4. 종료: ");
