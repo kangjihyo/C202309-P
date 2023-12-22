@@ -156,12 +156,12 @@ void shopping() {
 			scanf_s("%d", &brand_number);
 			strcpy_s(brand_name, sizeof(brand_name), p[brand_number - 1]);
 			for (int i = 0; i <= 8; i++) {
-				printf("%d. %s", i+1 ,p[i]);
+				printf("%d. %s", i + 1, p[i]);
 				printf("\t");
 				if (i == 3 || i == 6) {
 					printf("\t");
 				}
-				if (i == 2 || i==5) {
+				if (i == 2 || i == 5) {
 					printf("\n");
 				}
 			}
@@ -174,7 +174,7 @@ void shopping() {
 			strcpy_s(brand_name, sizeof(brand_name), q[brand_number - 1]);
 			for (int i = 0; i <= 8; i++) {
 				printf(" %s ", q[i]); //3,5,7번 입력시 오류 다른 파일에 실행해보니 완벽하게 작동.
-				if (i == 0) { 
+				if (i == 0) {
 					printf("\t");
 				}
 				if (i == 1) {
@@ -369,14 +369,27 @@ void exercise() {
 	printf("하고자 하는 운동이 무엇인가요? : ");
 	scanf_s("%s", place_name, sizeof(place_name));
 	while ((c = getchar()) != '\n' && c != EOF);
-	if (strcmp(place_name, "헬스") == 0) {
-		printf("%s은 %x위치에 있습니다.\n", exercise_kind.exercise_place[0], exercise_kind.place[0]);
-	}
-	if (strcmp(place_name, "축구") == 0) {
-		printf("%s은 %x위치에 있습니다.\n", exercise_kind.exercise_place[1], exercise_kind.place[1]);
-	}
-	if (strcmp(place_name, "테니스") == 0) {
-		printf("%s는 %x위치에 있습니다.\n", exercise_kind.exercise_place[2], exercise_kind.place[2]);
+	while (1)
+	{
+		if (strcmp(place_name, "헬스") == 0) {
+			printf("%s은 %x위치에 있습니다.\n", exercise_kind.exercise_place[0], exercise_kind.place[0]);
+			break;
+		}
+		if (strcmp(place_name, "축구") == 0) {
+			printf("%s은 %x위치에 있습니다.\n", exercise_kind.exercise_place[1], exercise_kind.place[1]);
+			break;
+		}
+		if (strcmp(place_name, "테니스") == 0) {
+			printf("%s는 %x위치에 있습니다.\n", exercise_kind.exercise_place[2], exercise_kind.place[2]);
+			break;
+		}
+		else
+		{
+			printf("다시 입력해 주세요\n");
+			printf("하고자 하는 운동이 무엇인가요? : ");
+			scanf_s("%s", place_name, sizeof(place_name));
+			while ((c = getchar()) != '\n' && c != EOF);
+		}
 	}
 	free(place_name); //이렇게 하니까 오류나는데..?
 }
@@ -437,27 +450,54 @@ void parking_lot(int parking_answer) {
 			}
 		}
 	}
+} //주차타워 제작 완료
+
+//일행 입장 시 문자 전송 시스템
+void message_to_party() {
+	int have_party;
+	int ask_sequence;
+	int phone_number = 0;
+	int party_number;
+	while (1) {
+		printf("일행이 있나요(1. 예 2. 아니요) : ");
+		scanf_s("%d", &have_party);
+		if (have_party == 1) {
+			printf("일행보다 먼저왔나요? (1. 예 2. 아니요 3. 이전질문) : ");
+			scanf_s("%d", &ask_sequence);
+			if (ask_sequence == 1) {
+				printf("본인의 전화번호를 입력해주세요( - 제외하고 입력) : ");
+				scanf_s("%d", &phone_number); //int라서 010이 10으로 저장됨
+			}
+			else if (ask_sequence == 2) {
+				printf("일행의 전화번호를 입력해주세요( - 제외하고 입력) : ");
+				scanf_s("%d", &party_number);
+				if (party_number == phone_number) {
+					printf("일행에게 문자가 전송됐습니다.\n");
+					break;
+				}
+				else if (party_number != phone_number) {
+					printf("먼저 들어온 일행이 없습니다.\n");
+				}
+			}
+			else if (ask_sequence == 3) {
+				continue;
+			}
+			else {
+				printf("번호를 다시 입력해주세요.");
+			}
+		}
+		else if (have_party == 2) { //2번 입력시 종료
+			break;
+		}
+		else { //예외처리
+			printf("번호를 다시 입력해주세요.\n");
+		}
+	}
 }
 int main() {
 	int purpose_to_here;
 	int parking_answer;
 	int place_matrix[3][3] = { {1,2,3},{4,5,6},{7,8,9} };
-	/*printf("주차 자리가 필요하십니까? 1. 예 2. 아니오 : ");
-	scanf_s("%d", &parking_answer);
-	while (parking_answer != 1) {
-		if (parking_answer == 1) {
-			parking_lot(parking_lot);
-		}
-		else if (parking_answer == 2) {
-			break;
-		}
-		else {
-			printf("잘못 입력하셨습니다. 다시 입력해주세요.");
-		}
-
-		printf("주차 자리가 필요하십니까? 1. 예 2. 아니오 : ");
-		scanf_s("%d", &parking_answer);
-	}*/
 	printf("이곳에 온 목적이 무엇입니까?\n 1. 영화관 2. 쇼핑(식자재, 의류) 3. 식당 4. 운동(헬스, 축구, 테니스) 5. 종료 : ");
 	scanf_s("%d", &purpose_to_here);
 	while (1) {
@@ -500,6 +540,7 @@ int main() {
 		printf("주차 자리가 필요하십니까? 1. 예 2. 아니오 : ");
 		scanf_s("%d", &parking_answer);
 	}
+	message_to_party(); //일행에게 메시지 전송
 	return 0;
 }
 
