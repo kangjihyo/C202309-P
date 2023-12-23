@@ -41,10 +41,19 @@ void select_movie(char** time_movie) { //함수화 시켜서 하나로 다 사용하기. movie
 		//문자열에 띄어쓰기가 포함되어 있어서 그랬음. 왜 그러는지 질문
 		printf("%d. %s\n", i + 1, p[i]);
 	}
-	printf("위의 시간표에서 시간을 골라주세요(숫자 작성) : ");
-	scanf_s("%d", &want_time);
-	strcpy_s(select_time, sizeof(p[want_time - 1]), p[want_time - 1]); //select_time에 p[want_time]시간 대입.
-	select_movie_time(time_movie, want_time, select_time);
+	while (1) {
+		printf("위의 시간표에서 시간을 골라주세요(숫자 작성) : ");
+		scanf_s("%d", &want_time); //저장 완료
+		if (want_time >= 1 && want_time <= 9) {
+			strcpy_s(select_time, sizeof(p[want_time - 1]), p[want_time - 1]); //select_time에 p[want_time]시간 대입.
+			select_movie_time(time_movie, want_time, select_time);
+			break;
+		}
+		else {
+			printf("잘못 입력하셨습니다.\n"); //예외처리 완료
+			continue;
+		}
+	}
 }
 
 void movie_theater() { // 영화를 선택했을 시의 메인이 되는 함수.
@@ -63,6 +72,10 @@ void movie_theater() { // 영화를 선택했을 시의 메인이 되는 함수.
 		scanf_s("%d", &genre);
 		if (genre == 4) {
 			break;
+		}
+		else if (genre < 1 || genre > 4) {
+			printf("잘못 입력하셨습니다.\n");
+			continue;
 		}
 		while (1) {
 			if (genre == 1) {
@@ -83,7 +96,7 @@ void movie_theater() { // 영화를 선택했을 시의 메인이 되는 함수.
 					break;
 				}
 				else {
-					printf("다시 선택해주세요.");
+					printf("다시 선택해주세요.\n");
 				}
 			}
 			else if (genre == 2) {
@@ -104,7 +117,7 @@ void movie_theater() { // 영화를 선택했을 시의 메인이 되는 함수.
 					break;
 				}
 				else {
-					printf("다시 선택해주세요.");
+					printf("다시 선택해주세요.\n");
 				}
 			}
 			else if (genre == 3) {
@@ -125,7 +138,7 @@ void movie_theater() { // 영화를 선택했을 시의 메인이 되는 함수.
 					break;
 				}
 				else {
-					printf("다시 선택해주세요.");
+					printf("다시 선택해주세요.\n");
 				}
 			}
 		}
