@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-//1번 함수 만들기 시작
 void select_movie_time(char** time_movie, int want_time, char* select_time) { //select_movie의 세부 함수
 	char(*p)[9] = time_movie;
 	char answer[10];
@@ -132,9 +131,6 @@ void movie_theater() { // 영화를 선택했을 시의 메인이 되는 함수.
 		}
 	}
 }
-//1번 함수 만들기 끝
-
-//2번 함수 만들기 시작
 void shopping() {
 	int purpose_shopping;
 	char market_place[9][9] = { "나이키", "스파이더", "8seconds", "MLB", "FILA", "유니클로","스투시", "무신사", "아디다스" };
@@ -194,10 +190,6 @@ void shopping() {
 		scanf_s("%d", &purpose_shopping);
 	}
 }
-//2번 함수 만들기 끝.
-//나중에 모든 매장의 위치를 저장한 후에 위치를 알려주는 함수를 만드는 것도 좋을듯.
-
-//3번 함수 만들기 시작
 typedef struct Korean_Food_price {
 	char food_name[3][10];
 	int food_price[3];
@@ -212,7 +204,6 @@ typedef struct Chinese_Food_price {
 	char food_name[3][10];
 	int food_price[3];
 }Cfood_price;
-
 void select_korean_menu(Kfood_price food, int yes_or_no, int food_number) {
 	do {
 		if (yes_or_no == 1) {
@@ -334,9 +325,6 @@ void cafeteria() {
 		select_chinese_menu(cfood, yes_or_no, food_number);
 	}
 }
-//3번 함수 만들기 끝.
-
-//4번 함수 만들기 시작
 typedef struct exercise_kind {
 	char type[3][10];
 	char exercise_place[3][10];
@@ -391,169 +379,5 @@ void exercise() {
 			while ((c = getchar()) != '\n' && c != EOF);
 		}
 	}
-	free(place_name); //이렇게 하니까 오류나는데..?
+	free(place_name); 
 }
-// 다른 파일 만들어서 실행해보니 free, 명품 이름 관련 출력 문제 해결
-
-//주차타워 층수마다 몇대 주차 가능한지 출력하기.
-//층수를 받아서 층수마다 딱 몇 층만 출력하기 ex) 1층인 경우 1층만 출력하기
-//주차타워 제작 중...
-void parking_lot(int parking_answer) {
-	int parking_lot[5][50] = { 0 }; //여기서 다시 초기화 해서 아래에서 값을 바꿔도 초기화가 되는 바람에 결국 값이 안바뀜
-	int want_number_parking_floor;
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; j < 50; j++) {
-			parking_lot[i][j] = j;
-		}
-	} //배열에 값 초기화 완료
-	while (1)
-	{
-		if (parking_answer == 1) {
-			printf("주차를 하고 싶은 층을 말해주세요 (1 ~ 5층 숫자만입력, 종료 : 6) : ");
-			scanf_s("%d", &want_number_parking_floor);
-			if (want_number_parking_floor <= 0 || want_number_parking_floor >= 7) { //예외 처리
-				printf("층을 다시 입력해주세요\n\n");
-				continue;
-			}
-			printf("\n");
-			if (want_number_parking_floor == 6) {
-				break;
-			}
-			printf("%d층\n", want_number_parking_floor);
-			for (int j = 0; j < 50; j++) {
-				if ((j + 1) / 10 == 0) {
-					printf(" ");
-				}
-				printf("%d ", parking_lot[want_number_parking_floor - 1][j] + 1);
-				if ((j + 1) % 5 == 0) {
-					printf("\n");
-				}
-			}
-			printf("\n");
-			int want_number_parking_number;
-			printf("주차 하고 싶은 자리를 골라주세요(0을 누르면 층을 다시 고를 수 있습니다) : "); //층 잘못골랐을 때 다시 고를 수 있게 함.
-			scanf_s("%d", &want_number_parking_number); //이거 index번호 아니다. -1해서 사용해야함
-			if (want_number_parking_number == 0) {
-				continue;
-			}
-			while (1)
-			{
-				if (want_number_parking_number < 0 || want_number_parking_number > 50) {
-					printf("번호를 다시 입력해주세요.\n");
-					printf("주차 하고 싶은 자리를 골라주세요 : ");
-					scanf_s("%d", &want_number_parking_number);
-				}
-				else {
-					parking_lot[want_number_parking_floor - 1][want_number_parking_number - 1] = -1; //0으로 값을 바꿨는데 왜 1로 저장됨?
-					break;
-				}
-			}
-		}
-	}
-} //주차타워 제작 완료
-
-//일행 입장 시 문자 전송 시스템
-void message_to_party() {
-	int have_party;
-	int ask_sequence;
-	int phone_number = 0;
-	int party_number;
-	while (1) {
-		printf("일행이 있나요(1. 예 2. 아니요) : ");
-		scanf_s("%d", &have_party);
-		if (have_party == 1) {
-			printf("일행보다 먼저왔나요? (1. 예 2. 아니요 3. 이전질문) : ");
-			scanf_s("%d", &ask_sequence);
-			if (ask_sequence == 1) {
-				printf("본인의 전화번호를 입력해주세요( - 제외하고 입력) : ");
-				scanf_s("%d", &phone_number); //int라서 010이 10으로 저장됨
-			}
-			else if (ask_sequence == 2) {
-				printf("일행의 전화번호를 입력해주세요( - 제외하고 입력) : ");
-				scanf_s("%d", &party_number);
-				if (party_number == phone_number) {
-					printf("일행에게 문자가 전송됐습니다.\n");
-					break;
-				}
-				else if (party_number != phone_number) {
-					printf("먼저 들어온 일행이 없습니다.\n");
-				}
-			}
-			else if (ask_sequence == 3) {
-				continue;
-			}
-			else {
-				printf("번호를 다시 입력해주세요.");
-			}
-		}
-		else if (have_party == 2) { //2번 입력시 종료
-			break;
-		}
-		else { //예외처리
-			printf("번호를 다시 입력해주세요.\n");
-		}
-	}
-}
-int main() {
-	int purpose_to_here;
-	int parking_answer;
-	int place_matrix[3][3] = { {1,2,3},{4,5,6},{7,8,9} };
-	printf("이곳에 온 목적이 무엇입니까?\n 1. 영화관 2. 쇼핑(식자재, 의류) 3. 식당 4. 운동(헬스, 축구, 테니스) 5. 종료 : ");
-	scanf_s("%d", &purpose_to_here);
-	while (1) {
-		if (purpose_to_here == 1) {
-			movie_theater();
-			printf("\n");
-		}
-		else if (purpose_to_here == 2) {
-			shopping();
-			printf("\n");
-		}
-		else if (purpose_to_here == 3) {
-			cafeteria();
-			printf("\n");
-		}
-		else if (purpose_to_here == 4) {
-			exercise();
-			printf("\n");
-		}
-		else if (purpose_to_here == 5) {
-			printf("이용해주셔서 감사합니다.\n\n");
-			break;
-		}
-		printf("이곳에 온 목적이 무엇입니까?\n 1. 영화관 2. 쇼핑(식자재, 의류) 3. 식당 4. 운동(헬스, 축구, 테니스) 5. 종료 : ");
-		scanf_s("%d", &purpose_to_here);
-	}
-	printf("주차 자리가 필요하십니까? 1. 예 2. 아니오 : ");
-	scanf_s("%d", &parking_answer);
-	while (1) {
-		if (parking_answer == 1) {
-			parking_lot(parking_answer);
-		}
-		else if (parking_answer == 2) {
-			break;
-		}
-		else {
-			printf("잘못 입력하셨습니다. 다시 입력해주세요.\n");
-		}
-
-		printf("주차 자리가 필요하십니까? 1. 예 2. 아니오 : ");
-		scanf_s("%d", &parking_answer);
-	}
-	message_to_party(); //일행에게 메시지 전송
-	return 0;
-}
-
-/*for (int i = 0; i < 5; i++) {
-			printf("%d층\n", i + 1);
-			for (int j = 0; j < 50; j++) {
-				if ((j + 1) / 10 == 0) {
-					printf(" ");
-				}
-				printf("%d ", parking_lot[i][j]+1);
-				if ((j+1) % 5 == 0) {
-					printf("\n");
-				}
-			}
-			printf("\n");
-		}*/

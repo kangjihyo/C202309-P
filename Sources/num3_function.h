@@ -1,0 +1,1 @@
+void message_to_party();
