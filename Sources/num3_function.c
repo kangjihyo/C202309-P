@@ -29,7 +29,7 @@ void message_to_party() {
 				continue;
 			}
 			else {
-				printf("번호를 다시 입력해주세요.");
+				printf("번호를 다시 입력해주세요.\n");
 			}
 		}
 		else if (have_party == 2) { //2번 입력시 종료

@@ -367,7 +367,7 @@ void exercise() {
 	for (int i = 0; i < 3; i++) {
 		exercise_kind.place[i] = &exercise_kind.exercise_place[i];
 	}
-	printf("하고자 하는 운동이 무엇인가요? : ");
+	printf("하고자 하는 운동이 무엇인가요? (문자 입력) : ");
 	scanf_s("%s", place_name, sizeof(place_name));
 	while ((c = getchar()) != '\n' && c != EOF);
 	while (1)

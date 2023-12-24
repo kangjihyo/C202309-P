@@ -47,7 +47,7 @@ void parking_lot(int parking_answer) {
 					scanf_s("%d", &want_number_parking_number);
 				}
 				else {
-					parking_lot[want_number_parking_floor - 1][want_number_parking_number - 1] = -1; //0으로 값을 바꿨는데 왜 1로 저장됨?
+					parking_lot[want_number_parking_floor - 1][want_number_parking_number - 1] = -1;
 					break;
 				}
 			}
